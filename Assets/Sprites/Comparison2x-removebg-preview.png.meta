@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: a3f78d7bca273eb48982b355c06b297b
+guid: c0b63ded2342fd643a837dc08cf9b9c7
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -43,9 +43,9 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -121,7 +121,91 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: Comparison2x-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 43
+        y: 79
+        width: 40
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4e08596c0916be945a93e9b75fdbedf3
+      internalID: -1227968984
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Comparison2x-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 157
+        y: 78
+        width: 40
+        height: 76
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba5519c434b2f224ab60da7abe4b2dfe
+      internalID: 37001701
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Comparison2x-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 42
+        y: 0
+        width: 43
+        height: 78
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8a0d72cb5d15b1041b14906b90a42858
+      internalID: 1833740513
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Comparison2x-removebg-preview_3
+      rect:
+        serializedVersion: 2
+        x: 153
+        y: 0
+        width: 45
+        height: 77
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed0eb294de2039a45b3656970505369e
+      internalID: -1127123326
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +216,11 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      Comparison2x-removebg-preview_0: -1227968984
+      Comparison2x-removebg-preview_1: 37001701
+      Comparison2x-removebg-preview_2: 1833740513
+      Comparison2x-removebg-preview_3: -1127123326
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
