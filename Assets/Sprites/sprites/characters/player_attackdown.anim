@@ -6,7 +6,7 @@ AnimationClip:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: player_attack
+  m_Name: player_attackdown
   serializedVersion: 7
   m_Legacy: 0
   m_Compressed: 0
@@ -21,13 +21,13 @@ AnimationClip:
   - serializedVersion: 2
     curve:
     - time: 0
-      value: {fileID: 106521208, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
-    - time: 0.16666667
-      value: {fileID: 759617065, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
-    - time: 0.33333334
-      value: {fileID: -152517387, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
-    - time: 0.5
-      value: {fileID: 821900947, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+      value: {fileID: 1946957106, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+    - time: 0.2
+      value: {fileID: 1264438663, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+    - time: 0.38333333
+      value: {fileID: -468752662, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+    - time: 0.5833333
+      value: {fileID: -2102207381, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
@@ -50,16 +50,16 @@ AnimationClip:
       isIntCurve: 0
       isSerializeReferenceCurve: 0
     pptrCurveMapping:
-    - {fileID: 106521208, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
-    - {fileID: 759617065, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
-    - {fileID: -152517387, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
-    - {fileID: 821900947, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+    - {fileID: 1946957106, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+    - {fileID: 1264438663, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+    - {fileID: -468752662, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
+    - {fileID: -2102207381, guid: d2b5e12b27c56e646902f7b548ea2fce, type: 3}
   m_AnimationClipSettings:
     serializedVersion: 2
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 0.51666665
+    m_StopTime: 0.59999996
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -86,7 +86,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.5
+  - time: 0.5833333
     functionName: UnlockMovement
     data: 
     objectReferenceParameter: {fileID: 0}
