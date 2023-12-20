@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 3533804444893377368}
   - component: {fileID: 4547622704928678637}
   - component: {fileID: 1760883884199416708}
+  - component: {fileID: 5621608549107935545}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -128,14 +129,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1662875504620795742}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 0
+  m_LinearDrag: 12
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -146,7 +147,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!61 &3533804444893377368
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -204,7 +205,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43b9f979953e8f14fb5a66ae6e030f80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 10
+  maxSpeed: 2.2
+  idleFriction: 0.9
   movementFilter:
     useTriggers: 0
     useLayerMask: 0
@@ -242,6 +245,20 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5621608549107935545
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1662875504620795742}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1572f34bb74b455479918a4beb9fc20f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  health: 3
+  damage: 1
 --- !u!1 &7235021381939033154
 GameObject:
   m_ObjectHideFlags: 0
@@ -304,10 +321,10 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.019205552, y: 0}
+  m_Offset: {x: 0.044233352, y: 0.010726206}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -318,7 +335,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.1615889, y: 0.2}
+  m_Size: {x: 0.2116445, y: 0.2214524}
   m_EdgeRadius: 0
 --- !u!114 &1803293489312929468
 MonoBehaviour:
@@ -332,5 +349,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1e9a7e2ef308c1a4699a4f462899e06c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  attackDirection: 0
   damage: 1
+  knockbackForce: 25
+  swordCollider: {fileID: 8392316847693876918}

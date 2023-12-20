@@ -4,15 +4,9 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
-    public enum AttackDirection {
-        Left,
-        Right
-    }
-
-    public AttackDirection attackDirection;
-
     public float damage = 1;
 
+    public float knockbackForce = 1000f;
     Vector2 AttackOffset;
     public Collider2D swordCollider;
 
@@ -26,27 +20,25 @@ public class SwordAttack : MonoBehaviour
 
             if (enemy != null) {
                 enemy.Health -= damage;
+                ApplyKnockback(enemy);
             }
         }
     }
 
-    public void Attack() {
-        switch(attackDirection) {
-            case AttackDirection.Left:
-                AttackLeft();
-                break;
-            case AttackDirection.Right:
-                AttackRight();
-                break;
-        }
+    private void ApplyKnockback(Enemy enemy)
+    {
+        Vector2 knockbackDirection = (Vector2) (enemy.transform.position - transform.position).normalized;
+        enemy.ApplyKnockbackForce(knockbackDirection, knockbackForce);
     }
 
     public void AttackRight() {
+        Debug.Log("Attacking right");
         swordCollider.enabled = true;
         transform.localPosition = AttackOffset;
     }
 
     public void AttackLeft() {
+        Debug.Log("Attacking left");
         swordCollider.enabled = true;
         transform.localPosition = new Vector2(-AttackOffset.x, AttackOffset.y);
     }
