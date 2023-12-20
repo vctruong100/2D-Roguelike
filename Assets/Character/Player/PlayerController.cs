@@ -5,9 +5,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-    public float moveSpeed = 700f;
-    
-    public float maxSpeed = 2f;
     public float idleFriction = 0.9f;
 
     Rigidbody2D rb;
@@ -21,29 +18,34 @@ public class PlayerController : MonoBehaviour
     private bool isMoving = false;
     public SwordAttack swordAttack;
 
+    PlayerStats playerStats;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        playerStats = GetComponent<PlayerStats>();
+
     }
 
 
     void FixedUpdate() {
         if (canMove) {
-                    if(moveInput != Vector2.zero) {
-            rb.velocity = Vector2.ClampMagnitude(rb.velocity + (moveInput * moveSpeed * Time.deltaTime), maxSpeed);
-
-            if(moveInput.x > 0) {
-                spriteRenderer.flipX = false;
-            } else if (moveInput.x < 0) {
-                spriteRenderer.flipX = true;
-            }
-            lastNonZeroMovement = moveInput;
-            UpdateAnimatorParameters();
+            if(moveInput != Vector2.zero) {
+                rb.velocity = Vector2.ClampMagnitude(rb.velocity + (moveInput * playerStats.moveSpeed * Time.deltaTime), playerStats.maxSpeed);
+                animator.SetBool("isMoving", true);
+                if(moveInput.x > 0) {
+                    spriteRenderer.flipX = false;
+                } else if (moveInput.x < 0) {
+                    spriteRenderer.flipX = true;
+                }
+                lastNonZeroMovement = moveInput;
+                UpdateAnimatorParameters();
 
         } else {
             rb.velocity = Vector2.Lerp(rb.velocity, Vector2.zero, idleFriction);
+            animator.SetBool("isMoving", false);
         }
         }
     }
@@ -75,6 +77,10 @@ public class PlayerController : MonoBehaviour
         animator.SetFloat("lastYInput", lastNonZeroMovement.y);
     }
 
+    public void ApplyKnockbackForce(Vector2 direction, float force) {
+        rb.AddForce(direction * force);
+    }
+
     public void EndSwordAttack()
     {
         UnlockMovement();
@@ -100,4 +106,5 @@ public class PlayerController : MonoBehaviour
     public void UnlockMovement() {
         canMove = true;
     }
+
 }

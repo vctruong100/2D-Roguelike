@@ -16,11 +16,14 @@ public class SwordAttack : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other) {
         if(other.CompareTag("Enemy")) {
-            Enemy enemy = other.GetComponent<Enemy>();
-
-            if (enemy != null) {
-                enemy.Health -= damage;
-                ApplyKnockback(enemy);
+            if (other.transform.parent != null)
+            {
+                Enemy enemy = other.transform.parent.GetComponent<Enemy>();
+                if (enemy != null) {
+                    enemy.Health -= damage;
+                    Debug.Log("Enemy health: " + enemy.health);
+                    ApplyKnockback(enemy);
+                }
             }
         }
     }
@@ -32,13 +35,11 @@ public class SwordAttack : MonoBehaviour
     }
 
     public void AttackRight() {
-        Debug.Log("Attacking right");
         swordCollider.enabled = true;
         transform.localPosition = AttackOffset;
     }
 
     public void AttackLeft() {
-        Debug.Log("Attacking left");
         swordCollider.enabled = true;
         transform.localPosition = new Vector2(-AttackOffset.x, AttackOffset.y);
     }
