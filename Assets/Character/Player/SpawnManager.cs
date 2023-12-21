@@ -5,7 +5,7 @@ using UnityEngine;
 public class SpawnManager : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public int numberOfEnemies = 10;
+    public int numberOfEnemies = 1;
     public float minX = -3.2f;
     public float maxX = 3.4f;
     public float minY = -1.7f;
@@ -46,6 +46,9 @@ public class SpawnManager : MonoBehaviour
             enemyPrefab.GetComponent<Enemy>().AddHealth(mapLevel.currentLevel / 2);
             enemyPrefab.GetComponent<Enemy>().AddDamage(mapLevel.currentLevel / 2);
             enemyPrefab.GetComponent<Enemy>().addMoveSpeed(1);
+            if (numberOfEnemies < 10) {
+                numberOfEnemies += 1;
+            }
         }
     }
 }

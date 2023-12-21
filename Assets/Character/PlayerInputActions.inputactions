@@ -31,6 +31,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "OpenStatusWindow",
+                    "type": "Button",
+                    "id": "d0760974-1955-450e-b7d6-42e695441f32",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -251,6 +260,17 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "64d76de9-97d7-4e9a-bed4-d8cfe9a1a5ca",
+                    "path": "<Keyboard>/b",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "OpenStatusWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -767,6 +787,34 @@
                     "processors": "",
                     "groups": "XR",
                     "action": "TrackedDeviceOrientation",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        },
+        {
+            "name": "B",
+            "id": "751c62ac-e9f4-4135-84fa-3fc434612e46",
+            "actions": [
+                {
+                    "name": "OpenStatsWindow",
+                    "type": "Button",
+                    "id": "0996525e-8ed8-4466-8fdb-0c121e66c36c",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "0deac945-5cef-4ab0-84a7-b965fdcb1ff6",
+                    "path": "<Keyboard>/b",
+                    "interactions": "Press",
+                    "processors": "",
+                    "groups": "Keyboard&Mouse",
+                    "action": "OpenStatsWindow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

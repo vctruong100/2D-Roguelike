@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
 
     bool canMove = true;
 
+    public PlayerStats playerStats;
+
     void FixedUpdate() {
         if(canMove) {
             if(detection.detectedObjects.Count > 0) {
@@ -73,6 +75,7 @@ public class Enemy : MonoBehaviour
 
     public void Die() {
         animator.SetTrigger("Die");
+        playerStats.AddExp(100);
     }
 
     public void RemoveEnemy() {

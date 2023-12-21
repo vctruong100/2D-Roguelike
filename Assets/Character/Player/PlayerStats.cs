@@ -5,9 +5,15 @@ using UnityEngine;
 public class PlayerStats : MonoBehaviour
 {
     public float health = 3;
+
+    private float currentHealth;
     public float damage = 1;
 
     public float moveSpeed = 700f;
+
+    public float regenRate = 5f;
+
+    public float regenHp = 1f;
     
     public float maxSpeed = 2f;
 
@@ -18,8 +24,8 @@ public class PlayerStats : MonoBehaviour
 
     public float Health {
         set {
-            health = value;
-            if(health <= 0) {
+            currentHealth = value;
+            if(currentHealth <= 0) {
                 Die();
             }
             else {
@@ -27,16 +33,31 @@ public class PlayerStats : MonoBehaviour
             }
         }
         get {
-            return health;
+            return currentHealth;
         }
     }
 
     Animator animator;
     Rigidbody2D rb;
     private void Start() {
+        currentHealth = health;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         CalculateExpToNextLevel();
+
+        StartCoroutine(RegenerateHealth());
+    }
+
+    private IEnumerator RegenerateHealth()
+    {
+        while (true)
+        {
+            yield return new WaitForSeconds(regenRate);
+
+            // Increase current health by 1
+            currentHealth = Mathf.Min(health, currentHealth + regenHp);
+            Debug.Log("Current health: " + currentHealth);
+        }
     }
 
     public void Die() {
@@ -62,5 +83,28 @@ public class PlayerStats : MonoBehaviour
 
     public void RemovePlayer() {
         Destroy(gameObject);
+    }
+
+    public string GetLevel() {
+        return level.ToString();
+    }
+
+    public string GetHealth() {
+        return health.ToString();
+    }
+    
+    public string GetCurrentHealth() {
+        return currentHealth.ToString();
+    }
+    public string GetDamage() {
+        return damage.ToString();
+    }
+
+    public string GetMoveSpeed() {
+        return moveSpeed.ToString();
+    }
+
+    public string GetExp() {
+        return currentExp.ToString();
     }
 }

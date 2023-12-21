@@ -262,6 +262,7 @@ MonoBehaviour:
   moveSpeed: 50
   knockbackForce: 300
   detection: {fileID: 4926820664827492988}
+  playerStats: {fileID: 5621608549107935545, guid: 7421eef611ce5ee49b27088de79e1500, type: 3}
 --- !u!95 &5493837697748310611
 Animator:
   serializedVersion: 5

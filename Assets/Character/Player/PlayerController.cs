@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
 
     PlayerStats playerStats;
 
+    public StatsCanvas statsCanvas;
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -29,6 +31,18 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    private void Update()
+    {
+        // Toggle the stats canvas with the "B" key using Input System
+
+        if (Keyboard.current.bKey.wasPressedThisFrame)
+        {
+            Debug.Log("B key pressed");
+            statsCanvas.ToggleStatsCanvas();
+        }
+
+        statsCanvas.UpdateUI();
+    }
 
     void FixedUpdate() {
         if (canMove) {

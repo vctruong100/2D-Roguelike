@@ -18,7 +18,7 @@ public class Hitbox : MonoBehaviour
             if (player != null)
             {
                 player.Health -= enemy.damage;
-                Debug.Log("Player health: " + player.health);
+                Debug.Log("Player health: " + player.GetCurrentHealth());
                 enemy.ApplyKnockback(playerController);
             }
         }
