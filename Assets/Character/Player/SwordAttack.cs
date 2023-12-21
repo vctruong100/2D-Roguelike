@@ -11,7 +11,7 @@ public class SwordAttack : MonoBehaviour
     public Collider2D swordCollider;
 
     private void Start() {
-        AttackOffset = transform.position;
+        AttackOffset = transform.localPosition;
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -41,7 +41,17 @@ public class SwordAttack : MonoBehaviour
 
     public void AttackLeft() {
         swordCollider.enabled = true;
-        transform.localPosition = new Vector2(-AttackOffset.x, AttackOffset.y);
+        transform.localPosition = new Vector2(-AttackOffset.x - 0.10f, AttackOffset.y);
+    }
+
+    public void AttackUp() {    
+        swordCollider.enabled = true;
+        transform.localPosition = new Vector2(-AttackOffset.x / 2f, -AttackOffset.y + 0.093f);
+    }
+    
+    public void AttackDown() {
+        swordCollider.enabled = true;
+        transform.localPosition = new Vector2(-AttackOffset.x / 2f, AttackOffset.y - 0.171f);
     }
     
     public void StopAttack() {

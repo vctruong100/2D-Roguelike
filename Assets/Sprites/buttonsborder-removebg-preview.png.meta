@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 4483e6c6af1d7724aa86974ee376dd78
+guid: cc4ac832b7878f243a1e220f8d5dd6e4
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -45,7 +45,7 @@ TextureImporter:
   compressionQuality: 50
   spriteMode: 2
   spriteExtrude: 1
-  spriteMeshType: 1
+  spriteMeshType: 0
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
@@ -121,7 +121,70 @@ TextureImporter:
     forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
-    sprites: []
+    sprites:
+    - serializedVersion: 2
+      name: buttonsborder-removebg-preview_0
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 333
+        width: 426
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1579c2c06002b3c4c802ea82410e9588
+      internalID: -685621469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttonsborder-removebg-preview_1
+      rect:
+        serializedVersion: 2
+        x: 38
+        y: 192
+        width: 424
+        height: 116
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 32de971509357c74ca2e787313c90bc3
+      internalID: 243793834
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: buttonsborder-removebg-preview_2
+      rect:
+        serializedVersion: 2
+        x: 36
+        y: 42
+        width: 423
+        height: 119
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4a586cf1563731e44b8cd1f178e853a1
+      internalID: -721053006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -132,7 +195,10 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      buttonsborder-removebg-preview_0: -685621469
+      buttonsborder-removebg-preview_1: 243793834
+      buttonsborder-removebg-preview_2: -721053006
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

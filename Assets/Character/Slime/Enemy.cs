@@ -8,19 +8,35 @@ public class Enemy : MonoBehaviour
     public float health = 1;
     public float damage = 1;
 
-    public float moveSpeed = 500f;
+    public float moveSpeed = 50f;
 
     public float knockbackForce = 300f;
     Rigidbody2D rb;
 
     public Detection detection;
 
+    bool canMove = true;
+
     void FixedUpdate() {
-        if(detection.detectedObjects.Count > 0) {
-            Collider2D target = detection.detectedObjects[0];
-            Vector2 direction = (target.transform.position - transform.position).normalized;
-            rb.AddForce(direction * moveSpeed * Time.fixedDeltaTime);
+        if(canMove) {
+            if(detection.detectedObjects.Count > 0) {
+                Collider2D target = detection.detectedObjects[0];
+                Vector2 direction = (target.transform.position - transform.position).normalized;
+                rb.AddForce(direction * moveSpeed * Time.fixedDeltaTime);
+            }       
         }
+    }
+
+    public void AddHealth(float amount) {
+        health += amount;
+    }
+
+    public void AddDamage(float amount) {
+        damage += amount;
+    }
+
+    public void addMoveSpeed(float amount) {
+        moveSpeed += amount;
     }
 
     private void Start() {
@@ -44,7 +60,9 @@ public class Enemy : MonoBehaviour
     }
 
     public void ApplyKnockbackForce(Vector2 direction, float force) {
-        rb.AddForce(direction * force);
+        if (canMove) {
+            rb.AddForce(direction * force);
+        }
     }
 
     public void ApplyKnockback(PlayerController player)
@@ -59,6 +77,10 @@ public class Enemy : MonoBehaviour
 
     public void RemoveEnemy() {
         Destroy(gameObject);
+    }
+
+    public void FreezeEnemy() {
+        canMove = false;
     }
 
 }

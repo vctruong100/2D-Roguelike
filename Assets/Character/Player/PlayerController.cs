@@ -88,8 +88,15 @@ public class PlayerController : MonoBehaviour
     }
     public void SwordAttack() {
         LockMovement();
-
-        if (spriteRenderer.flipX == true)
+        if (moveInput.y > 0) // Up
+        {
+            swordAttack.AttackUp();
+        }
+        else if (moveInput.y < 0) // Down
+        {
+            swordAttack.AttackDown();
+        }
+        else if (spriteRenderer.flipX == true)
         {
             swordAttack.AttackLeft();
         }

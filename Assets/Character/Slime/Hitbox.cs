@@ -10,7 +10,6 @@ public class Hitbox : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        Debug.Log("Hitbox triggered");
         if (other.CompareTag("Player"))
         {
             PlayerStats player = other.GetComponent<PlayerStats>();
