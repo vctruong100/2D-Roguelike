@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     public SwordAttack swordAttack;
 
     PlayerStats playerStats;
-
-    public StatsCanvas statsCanvas;
+    StatsCanvas statsCanvas;
+    private RespawnManager respawnManager;
 
     void Start()
     {
@@ -28,20 +28,33 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerStats = GetComponent<PlayerStats>();
+        Transform statsCanvasTransform = transform.Find("Stats");
+        statsCanvas = statsCanvasTransform.GetComponent<StatsCanvas>();
+        statsCanvas.AssignPlayerStats(playerStats);
+        respawnManager = FindObjectOfType<RespawnManager>();
+    }
 
+    private void CheckIfAlive(int newhealth) {
+        if (newhealth <= 0) {
+            RemovePlayer();
+            respawnManager.PlayerDied();
+        }
+    }
+    
+    private void RemovePlayer() {
+        Destroy(gameObject);
+    }
+
+    public void TakeDamage(int damage) {
+        playerStats.TakeDamage(damage);
     }
 
     private void Update()
     {
-        // Toggle the stats canvas with the "B" key using Input System
-
         if (Keyboard.current.bKey.wasPressedThisFrame)
         {
-            Debug.Log("B key pressed");
             statsCanvas.ToggleStatsCanvas();
         }
-
-        statsCanvas.UpdateUI();
     }
 
     void FixedUpdate() {

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
-    public float damage = 1;
+    public int damage = 1;
 
     public float knockbackForce = 1000f;
     Vector2 AttackOffset;
@@ -21,7 +21,7 @@ public class SwordAttack : MonoBehaviour
                 Enemy enemy = other.transform.parent.GetComponent<Enemy>();
                 if (enemy != null) {
                     enemy.Health -= damage;
-                    Debug.Log("Enemy health: " + enemy.health);
+                    Debug.Log("Enemy health: " + enemy.GetHealth());
                     ApplyKnockback(enemy);
                 }
             }

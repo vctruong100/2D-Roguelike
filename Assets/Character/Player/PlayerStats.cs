@@ -1,71 +1,78 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerStats : MonoBehaviour
 {
-    public float health = 3;
+    [Header("Default initialize values")]
+    public Stats2 max_health;
+    public Stats2 armor;
+    public Stats2 damage;
+    public float moveSpeed;
+    public float maxSpeed;
+    public Stats2 regenRate;
+    public Stats2 regenHp;
+    public int level { get; private set; }
 
-    private float currentHealth;
-    public float damage = 1;
+    private int currentExp { get; set; }
+    private int expToNextLevel { get; set; }
+    public int currentHealth { get; private set; }
+    Animator animator;
+    private bool isPlayerAlive;
+    Rigidbody2D rb;
 
-    public float moveSpeed = 700f;
+    void Awake () {
+        currentHealth = max_health.GetValue();
+        level = 0;
+        currentExp = 0;
+        CalculateExpToNextLevel();
+        isPlayerAlive = true;
+    }
 
-    public float regenRate = 5f;
-
-    public float regenHp = 1f;
-    
-    public float maxSpeed = 2f;
-
-    public int level = 1;
-    private double currentExp = 0;
-
-    private double expToNextLevel = 0; 
-
-    public float Health {
-        set {
-            currentHealth = value;
-            if(currentHealth <= 0) {
-                Die();
-            }
-            else {
-                animator.SetTrigger("Hit");
-            }
-        }
-        get {
-            return currentHealth;
+    void Update () {
+        if (Input.GetKeyDown(KeyCode.T)) {
+            LevelUp();
         }
     }
 
-    Animator animator;
-    Rigidbody2D rb;
+    public void TakeDamage (int damage) {
+        damage -= armor.GetValue();
+        damage = Mathf.Clamp(damage, 0, int.MaxValue);
+
+        currentHealth -= damage;
+        Debug.Log(transform.name + " takes " + damage + " damage.");
+
+        if (currentHealth <= 0) {
+            Die();
+        }
+    }
+
     private void Start() {
-        currentHealth = health;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        CalculateExpToNextLevel();
-
         StartCoroutine(RegenerateHealth());
     }
 
     private IEnumerator RegenerateHealth()
     {
-        while (true)
+        while (isPlayerAlive)
         {
-            yield return new WaitForSeconds(regenRate);
+            yield return new WaitForSeconds(regenRate.GetValue());
 
             // Increase current health by 1
-            currentHealth = Mathf.Min(health, currentHealth + regenHp);
-            Debug.Log("Current health: " + currentHealth);
+            currentHealth = Mathf.Min(max_health.GetValue(), currentHealth + regenHp.GetValue());
         }
     }
 
     public void Die() {
+        isPlayerAlive = false;
         animator.SetTrigger("Die");
     }
 
     public void CalculateExpToNextLevel() {
-        expToNextLevel = 100.0 * level * level * 0.8;
+        expToNextLevel = 100 + Mathf.RoundToInt(Mathf.Pow(level, 2) * 100);
+
     }
 
     public void AddExp(int exp) {
@@ -77,34 +84,10 @@ public class PlayerStats : MonoBehaviour
 
     private void LevelUp() {
         level++;
-        currentExp = currentExp - expToNextLevel;
+        int excessExp = currentExp - expToNextLevel;
+        currentExp = 0; 
         CalculateExpToNextLevel();
-    }
-
-    public void RemovePlayer() {
-        Destroy(gameObject);
-    }
-
-    public string GetLevel() {
-        return level.ToString();
-    }
-
-    public string GetHealth() {
-        return health.ToString();
-    }
-    
-    public string GetCurrentHealth() {
-        return currentHealth.ToString();
-    }
-    public string GetDamage() {
-        return damage.ToString();
-    }
-
-    public string GetMoveSpeed() {
-        return moveSpeed.ToString();
-    }
-
-    public string GetExp() {
-        return currentExp.ToString();
+        Debug.Log("Level: " + level + " - Current exp: " + currentExp + "/" + expToNextLevel);
+        AddExp(excessExp);
     }
 }

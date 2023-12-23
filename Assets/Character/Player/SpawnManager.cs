@@ -12,12 +12,13 @@ public class SpawnManager : MonoBehaviour
     public float maxY = 2.2f;
     public float spawnInterval = 20f;
 
-    public MapLevel mapLevel;
+    MapLevel mapLevel;
 
     void Start()
     {
         // Spawn enemies when the scene starts
         SpawnEnemiesPeriodically();
+        mapLevel = FindObjectOfType<MapLevel>();
     }
 
     void SpawnEnemiesPeriodically()

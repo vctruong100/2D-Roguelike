@@ -4,20 +4,22 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    public EnemyInitialStats initialStats;
+    private int health;
+    private int damage;
+    private float moveSpeed;
+    private int exp;
     Animator animator;
-    public float health = 1;
-    public float damage = 1;
-
-    public float moveSpeed = 50f;
 
     public float knockbackForce = 300f;
     Rigidbody2D rb;
 
     public Detection detection;
 
+
     bool canMove = true;
 
-    public PlayerStats playerStats;
+    PlayerStats playerStats;
 
     void FixedUpdate() {
         if(canMove) {
@@ -29,11 +31,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    public void AddHealth(float amount) {
+    public void AddHealth(int amount) {
         health += amount;
     }
 
-    public void AddDamage(float amount) {
+    public void AddDamage(int amount) {
         damage += amount;
     }
 
@@ -44,9 +46,11 @@ public class Enemy : MonoBehaviour
     private void Start() {
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        ResetStats();
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
     }
 
-    public float Health {
+    public int Health {
         set {
             health = value;
             if(health <= 0) {
@@ -75,7 +79,9 @@ public class Enemy : MonoBehaviour
 
     public void Die() {
         animator.SetTrigger("Die");
-        playerStats.AddExp(100);
+        if (playerStats != null) {
+            playerStats.AddExp(exp);
+        }
     }
 
     public void RemoveEnemy() {
@@ -86,4 +92,27 @@ public class Enemy : MonoBehaviour
         canMove = false;
     }
 
+    private void ResetStats()
+    {
+        health = initialStats.initial_health;
+        damage = initialStats.initial_damage;
+        moveSpeed = initialStats.initial_moveSpeed;
+        exp = initialStats.initial_exp;
+    }
+
+    public int GetHealth() {
+        return health;
+    }
+
+    public int GetDamage() {
+        return damage;
+    }
+
+    public float GetMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public int GetExp() {
+        return exp;
+    }
 }
