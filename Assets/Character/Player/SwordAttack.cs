@@ -20,8 +20,8 @@ public class SwordAttack : MonoBehaviour
             {
                 Enemy enemy = other.transform.parent.GetComponent<Enemy>();
                 if (enemy != null) {
-                    enemy.Health -= damage;
-                    Debug.Log("Enemy health: " + enemy.GetHealth());
+                    enemy.TakeDamage(damage);
+                    Debug.Log("Enemy health: " + enemy.currentHealth);
                     ApplyKnockback(enemy);
                 }
             }

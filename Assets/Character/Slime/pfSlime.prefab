@@ -96,7 +96,6 @@ GameObject:
   - component: {fileID: 3184847322857828216}
   - component: {fileID: 7956108490414309888}
   - component: {fileID: 4234910740053793680}
-  - component: {fileID: 3306634851465432232}
   - component: {fileID: 5493837697748310611}
   m_Layer: 0
   m_Name: pfSlime
@@ -162,7 +161,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 1800516077, guid: c0bb7adbd57c29044a6a635d9bd60bfb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -258,25 +257,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b9722a79d12df1b44b061cc39b6ac543, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialStats: {fileID: 3306634851465432232}
+  max_health:
+    baseValue: 1
+  damage:
+    baseValue: 1
+  moveSpeed:
+    baseValue: 40
+  exp:
+    baseValue: 50
   knockbackForce: 300
   detection: {fileID: 4926820664827492988}
---- !u!114 &3306634851465432232
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8532134621232381015}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5c1f468f4161b64e98169080fe912e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  initial_health: 1
-  initial_damage: 1
-  initial_moveSpeed: 50
-  initial_exp: 50
 --- !u!95 &5493837697748310611
 Animator:
   serializedVersion: 5

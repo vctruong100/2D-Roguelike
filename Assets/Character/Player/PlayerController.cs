@@ -28,9 +28,17 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         playerStats = GetComponent<PlayerStats>();
-        Transform statsCanvasTransform = transform.Find("Stats");
-        statsCanvas = statsCanvasTransform.GetComponent<StatsCanvas>();
-        statsCanvas.AssignPlayerStats(playerStats);
+        GameObject statsCanvasGameObject = GameObject.Find("Stats");
+        if (statsCanvasGameObject != null)
+        {
+            if (!statsCanvasGameObject.activeSelf)
+            {
+                statsCanvasGameObject.SetActive(true);
+            }
+            statsCanvas = statsCanvasGameObject.GetComponent<StatsCanvas>();
+        }
+        Debug.Log("StatsCanvas: " + statsCanvas);
+        //statsCanvas.AssignPlayerStats(playerStats);
         respawnManager = FindObjectOfType<RespawnManager>();
     }
 

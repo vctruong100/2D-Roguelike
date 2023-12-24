@@ -4,19 +4,17 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    public EnemyInitialStats initialStats;
-    private int health;
-    private int damage;
-    private float moveSpeed;
-    private int exp;
-    Animator animator;
-
+    [Header("Default initialize values")]
+    public Stats max_health;
+    public Stats damage;
+    public Stats moveSpeed;
+    public Stats exp;
     public float knockbackForce = 300f;
+    public int currentHealth { get; private set; }
+    Animator animator;
     Rigidbody2D rb;
 
     public Detection detection;
-
-
     bool canMove = true;
 
     PlayerStats playerStats;
@@ -26,42 +24,27 @@ public class Enemy : MonoBehaviour
             if(detection.detectedObjects.Count > 0) {
                 Collider2D target = detection.detectedObjects[0];
                 Vector2 direction = (target.transform.position - transform.position).normalized;
-                rb.AddForce(direction * moveSpeed * Time.fixedDeltaTime);
+                rb.AddForce(direction * moveSpeed.GetValue() * Time.fixedDeltaTime);
             }       
         }
     }
 
-    public void AddHealth(int amount) {
-        health += amount;
-    }
-
-    public void AddDamage(int amount) {
-        damage += amount;
-    }
-
-    public void addMoveSpeed(float amount) {
-        moveSpeed += amount;
-    }
-
     private void Start() {
+        currentHealth = max_health.GetValue();
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
-        ResetStats();
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
     }
 
-    public int Health {
-        set {
-            health = value;
-            if(health <= 0) {
-                Die();
-            }
-            else {
-                animator.SetTrigger("Hit");
-            }
+    public void TakeDamage (int damage) {
+        currentHealth -= damage;
+        Debug.Log(transform.name + " takes " + damage + " damage.");
+
+        if (currentHealth <= 0) {
+            Die();
         }
-        get {
-            return health;
+        else {
+            animator.SetTrigger("Hit");
         }
     }
 
@@ -80,7 +63,7 @@ public class Enemy : MonoBehaviour
     public void Die() {
         animator.SetTrigger("Die");
         if (playerStats != null) {
-            playerStats.AddExp(exp);
+            playerStats.AddExp(exp.GetValue());
         }
     }
 
@@ -90,29 +73,5 @@ public class Enemy : MonoBehaviour
 
     public void FreezeEnemy() {
         canMove = false;
-    }
-
-    private void ResetStats()
-    {
-        health = initialStats.initial_health;
-        damage = initialStats.initial_damage;
-        moveSpeed = initialStats.initial_moveSpeed;
-        exp = initialStats.initial_exp;
-    }
-
-    public int GetHealth() {
-        return health;
-    }
-
-    public int GetDamage() {
-        return damage;
-    }
-
-    public float GetMoveSpeed() {
-        return moveSpeed;
-    }
-
-    public int GetExp() {
-        return exp;
     }
 }

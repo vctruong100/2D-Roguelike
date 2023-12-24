@@ -44,9 +44,9 @@ public class SpawnManager : MonoBehaviour
             // Reset the timer
             spawnInterval = Time.time + spawnInterval;
             mapLevel.IncreaseLevel();
-            enemyPrefab.GetComponent<Enemy>().AddHealth(mapLevel.currentLevel / 2);
-            enemyPrefab.GetComponent<Enemy>().AddDamage(mapLevel.currentLevel / 2);
-            enemyPrefab.GetComponent<Enemy>().addMoveSpeed(1);
+            enemyPrefab.GetComponent<Enemy>().max_health.SetAttributes(1 + mapLevel.currentLevel * 2);
+            enemyPrefab.GetComponent<Enemy>().damage.SetAttributes(1 + mapLevel.currentLevel / 2);
+            enemyPrefab.GetComponent<Enemy>().moveSpeed.SetAttributes(40 + mapLevel.currentLevel / 2);
             if (numberOfEnemies < 10) {
                 numberOfEnemies += 1;
             }

@@ -4,7 +4,7 @@ using UnityEngine;
 using System;
 
 [Serializable]
-public class Stats2
+public class Stats
 {
     [SerializeField]
     private int baseValue;
@@ -21,5 +21,12 @@ public class Stats2
         if(modifier != 0) {
             modifiers.Remove(modifier);
         }
+    }
+    public void SetAttributes (int attribute) {
+        baseValue = attribute;
+    }
+
+    public void AddAttributes (int attribute) {
+        baseValue += attribute;
     }
 }
