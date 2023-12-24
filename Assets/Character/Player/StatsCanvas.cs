@@ -62,6 +62,11 @@ public class StatsCanvas : MonoBehaviour
             speedText.text = playerStats.moveSpeed.ToString();
             armorText.text = playerStats.armor.GetValue().ToString();
             pointsText.text = playerStats.points.ToString();
+
+            healthButton.interactable = playerStats.points > 0;
+            damageButton.interactable = playerStats.points > 0;
+            speedButton.interactable = playerStats.points > 0 && playerStats.moveSpeed < playerStats.maxSpeed;
+            armorButton.interactable = playerStats.points > 0;
         }
         else
         {
@@ -95,7 +100,12 @@ public class StatsCanvas : MonoBehaviour
         if (playerStats.points > 0)
         {
             playerStats.points--;
-            playerStats.moveSpeed++; // Increase speed by 1
+            playerStats.moveSpeed += 0.5f; 
+            if (playerStats.moveSpeed >= playerStats.maxSpeed)
+            {
+                playerStats.moveSpeed = playerStats.maxSpeed;
+                speedButton.interactable = false;
+            }
             UpdateUI();
         }
     }

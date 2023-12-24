@@ -74,7 +74,7 @@ public class CharacterStats : MonoBehaviour
     }
 
     public void CalculateExpToNextLevel() {
-        expToNextLevel = 100 + Mathf.RoundToInt(Mathf.Pow(level, 2) * 100);
+        expToNextLevel = (int) (level * 100 * 1.25);
 
     }
 

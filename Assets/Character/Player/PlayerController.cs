@@ -37,8 +37,6 @@ public class PlayerController : MonoBehaviour
             }
             statsCanvas = statsCanvasGameObject.GetComponent<StatsCanvas>();
         }
-        Debug.Log("StatsCanvas: " + statsCanvas);
-        //statsCanvas.AssignPlayerStats(playerStats);
         respawnManager = FindObjectOfType<RespawnManager>();
     }
 

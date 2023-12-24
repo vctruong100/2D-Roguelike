@@ -5,10 +5,16 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [Header("Default initialize values")]
-    public Stats max_health;
-    public Stats damage;
-    public Stats moveSpeed;
-    public Stats exp;
+    public Stats initial_max_health;
+    public Stats initial_damage;
+    public Stats initial_moveSpeed;
+
+    private int max_health { get; set; }
+    private int damage { get; set; }
+    private float moveSpeed { get; set; }
+    //public Stats armor;
+    public Stats initial_exp;
+    private int exp { get; set; }
     public float knockbackForce = 300f;
     public int currentHealth { get; private set; }
     Animator animator;
@@ -24,19 +30,27 @@ public class Enemy : MonoBehaviour
             if(detection.detectedObjects.Count > 0) {
                 Collider2D target = detection.detectedObjects[0];
                 Vector2 direction = (target.transform.position - transform.position).normalized;
-                rb.AddForce(direction * moveSpeed.GetValue() * Time.fixedDeltaTime);
+                rb.AddForce(direction * moveSpeed * Time.fixedDeltaTime);
             }       
         }
     }
 
     private void Start() {
-        currentHealth = max_health.GetValue();
+        max_health = initial_max_health.GetValue();
+        damage = initial_damage.GetValue();
+        moveSpeed = initial_moveSpeed.GetValue();
+        exp = initial_exp.GetValue();
+
+        currentHealth = max_health;
         animator = GetComponent<Animator>();
         rb = GetComponent<Rigidbody2D>();
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
     }
 
     public void TakeDamage (int damage) {
+        // damage -= armor.GetValue();
+        // damage = Mathf.Clamp(damage, 0, int.MaxValue);
+
         currentHealth -= damage;
         Debug.Log(transform.name + " takes " + damage + " damage.");
 
@@ -63,7 +77,7 @@ public class Enemy : MonoBehaviour
     public void Die() {
         animator.SetTrigger("Die");
         if (playerStats != null) {
-            playerStats.AddExp(exp.GetValue());
+            playerStats.AddExp(exp);
         }
     }
 
@@ -74,4 +88,32 @@ public class Enemy : MonoBehaviour
     public void FreezeEnemy() {
         canMove = false;
     }
+
+    public void SetAttributes(int max_health, int damage, float moveSpeed, int exp) {
+        //Debug.Log("Setting attributes: " + max_health + ", " + damage + ", " + moveSpeed + ", " + exp);
+        this.max_health = max_health;
+        currentHealth = max_health;
+        this.damage = damage;
+        this.moveSpeed = moveSpeed;
+        this.exp = exp;
+        //Debug.Log("New attributes: " + this.max_health + ", " + this.damage + ", " + this.moveSpeed + ", " + this.exp);
+    }
+
+    public int GetMaxHealth() {
+        return max_health;
+    }
+
+    public int GetDamage() {
+        return damage;
+    }
+
+    public float GetMoveSpeed() {
+        return moveSpeed;
+    }
+
+    public int GetExp() {
+        return exp;
+    }
+
+
 }

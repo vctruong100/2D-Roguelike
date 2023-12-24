@@ -5,13 +5,15 @@ using UnityEngine;
 public class SwordAttack : MonoBehaviour
 {
     public int damage = 1;
-
     public float knockbackForce = 1000f;
     Vector2 AttackOffset;
     public Collider2D swordCollider;
+    
+    PlayerStats playerStats;
 
     private void Start() {
         AttackOffset = transform.localPosition;
+        playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
     }
 
     private void OnTriggerEnter2D(Collider2D other) {
@@ -20,7 +22,7 @@ public class SwordAttack : MonoBehaviour
             {
                 Enemy enemy = other.transform.parent.GetComponent<Enemy>();
                 if (enemy != null) {
-                    enemy.TakeDamage(damage);
+                    enemy.TakeDamage(damage + playerStats.damage.GetValue());
                     Debug.Log("Enemy health: " + enemy.currentHealth);
                     ApplyKnockback(enemy);
                 }
