@@ -17,3 +17,5 @@ This is a 2D roguelike game developed using Unity.
 
 ## Credits
 - Game assets from (https://game-endeavor.itch.io/mystic-woods)
+
+Itch.io link: https://vctruong100.itch.io/roguelike-2d
