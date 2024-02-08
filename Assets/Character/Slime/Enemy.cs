@@ -47,6 +47,16 @@ public class Enemy : MonoBehaviour
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
     }
 
+    public void ResetToInitialStats()
+    {
+        SetAttributes(
+            initial_max_health.GetValue(),
+            initial_damage.GetValue(),
+            initial_moveSpeed.GetValue(),
+            initial_exp.GetValue()
+        );
+    }
+
     public void TakeDamage (int damage) {
         // damage -= armor.GetValue();
         // damage = Mathf.Clamp(damage, 0, int.MaxValue);

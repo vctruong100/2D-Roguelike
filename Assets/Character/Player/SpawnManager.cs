@@ -11,6 +11,8 @@ public class SpawnManager : MonoBehaviour
     public float minY = -1.7f;
     public float maxY = 2.2f;
     public float spawnInterval = 10f;
+    private float nextSpawnTime;
+    private bool increaseLevel = true;
 
     MapLevel mapLevel;
     List<GameObject> spawnedEnemies = new List<GameObject>(); // Keep track of spawned enemies
@@ -18,6 +20,7 @@ public class SpawnManager : MonoBehaviour
     void Start()
     {
         mapLevel = FindObjectOfType<MapLevel>();
+        nextSpawnTime = Time.time;
         SpawnEnemiesPeriodically();
     }
 
@@ -36,28 +39,32 @@ public class SpawnManager : MonoBehaviour
 
     void SpawnEnemies()
     {
-        if (Time.time >= spawnInterval || spawnedEnemies.Count == 0)
-        {
-            for (int i = 0; i < numberOfEnemies; i++)
+            if (Time.time >= nextSpawnTime)
             {
-                float spawnX = Random.Range(minX, maxX);
-                float spawnY = Random.Range(minY, maxY);
-                Vector2 spawnPosition = new Vector2(spawnX, spawnY);
-
-                if (enemies.Count > 0)
+                for (int i = 0; i < numberOfEnemies; i++)
                 {
-                    GameObject enemyGO = Instantiate(enemies[0], spawnPosition, Quaternion.identity);
-                    spawnedEnemies.Add(enemyGO); // Keep a reference to the spawned enemy
-                    Enemy enemy = enemyGO.GetComponent<Enemy>();
+                    float spawnX = Random.Range(minX, maxX);
+                    float spawnY = Random.Range(minY, maxY);
+                    Vector2 spawnPosition = new Vector2(spawnX, spawnY);
 
-                    // Modify attributes with a slight delay
-                    StartCoroutine(ModifyEnemyAttributesDelayed(enemy));
+                    if (enemies.Count > 0)
+                    {
+                        GameObject enemyGO = Instantiate(enemies[0], spawnPosition, Quaternion.identity);
+                        spawnedEnemies.Add(enemyGO); // Keep a reference to the spawned enemy
+                        Enemy enemy = enemyGO.GetComponent<Enemy>();
+
+                        // Modify attributes with a slight delay
+                        StartCoroutine(ModifyEnemyAttributesDelayed(enemy));
+                    }
                 }
+
+
+            nextSpawnTime = Time.time + spawnInterval;
+            if (increaseLevel)
+            {
+                mapLevel.IncreaseLevel();
             }
-
-            spawnInterval = Time.time + spawnInterval;
-            mapLevel.IncreaseLevel();
-
+            increaseLevel = true;
             int current = mapLevel.currentLevel;
             if (current == 15 || current == 30 || current == 51 || current == 75 || current == 101)
             {
@@ -101,4 +108,37 @@ public class SpawnManager : MonoBehaviour
         Debug.Log("After Enemy Attributes: Health: " + enemy.GetMaxHealth() + " Damage: " + enemy.GetDamage() + " Speed: " + enemy.GetMoveSpeed() + " Exp: " + enemy.GetExp());
     }
 
+    public void ResetLevelAndEnemies()
+    {
+        CancelInvoke("SpawnEnemies");
+        foreach (var enemy in spawnedEnemies)
+        {
+            Destroy(enemy);
+        }
+        spawnedEnemies.Clear();
+        mapLevel.currentLevel = 1;
+
+        increaseLevel = false;;
+        mapLevel.UpdateLevelText();
+
+        numberOfEnemies = 1; // Set this to whatever your initial number of enemies should be
+
+        ResetEnemyPrefabStats();
+
+        nextSpawnTime = Time.time;
+        InvokeRepeating("SpawnEnemies", 0f, spawnInterval);
+    }
+
+    // Resets the enemy prefab stats back to their initial values
+    private void ResetEnemyPrefabStats()
+    {
+        foreach (var enemyPrefab in enemies)
+        {
+            Enemy enemy = enemyPrefab.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                enemy.ResetToInitialStats(); 
+            }
+        }
+    }
 }

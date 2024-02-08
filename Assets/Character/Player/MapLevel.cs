@@ -21,10 +21,11 @@ public class MapLevel : MonoBehaviour
     public void IncreaseLevel()
     {
         currentLevel++;
+        Debug.Log("Increased level to " + currentLevel);
         UpdateLevelText();
     }
 
-    void UpdateLevelText()
+    public void UpdateLevelText()
     {
         levelText.text = "Level:";
         numberText.text = currentLevel.ToString();

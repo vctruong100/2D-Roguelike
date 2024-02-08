@@ -28,8 +28,8 @@ public class StatsCanvas : MonoBehaviour
             statsPanel.SetActive(false);
         }
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
+    
     }
-
 
 
     private IEnumerator UpdateUIPeriodically()
@@ -47,10 +47,11 @@ public class StatsCanvas : MonoBehaviour
         statsPanel.SetActive(!statsPanel.activeSelf);
     }
 
-    // public void AssignPlayerStats(PlayerStats playerStats)
-    // {
-    //     this.playerStats = playerStats;
-    // }
+    public void AssignPlayerStats(PlayerStats newPlayerStats)
+    {
+        playerStats = newPlayerStats;
+        UpdateUI(); // Update the UI to reflect the new player's stats
+    }
 
     public void UpdateUI()
     {

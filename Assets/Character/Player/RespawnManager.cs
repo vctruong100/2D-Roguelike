@@ -1,30 +1,60 @@
 using UnityEngine;
-using UnityEngine.UI;
+using Cinemachine;
 
 public class RespawnManager : MonoBehaviour
 {
-    [SerializeField] private Button respawnButton;
-    [SerializeField] private GameObject playerPrefab;
-    private void Start()
-    {
-        respawnButton.onClick.AddListener(RespawnPlayer);
+    public static RespawnManager Instance { get; private set; }
 
-        respawnButton.gameObject.SetActive(false);
+    public GameObject playerPrefab;
+    public Transform spawnPoint;
+    public GameObject respawnButton; // UI Button to respawn the player
+    public CinemachineVirtualCamera virtualCamera;
+
+    private void Awake()
+    {
+        respawnButton.SetActive(false);
+
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void PlayerDied()
     {
-        respawnButton.gameObject.SetActive(true);
+        // Show the respawn button
+        respawnButton.SetActive(true);
     }
 
-    private void RespawnPlayer()
+    public void RespawnPlayer()
     {
-        respawnButton.gameObject.SetActive(false);
-        SpawnPlayer();
-    }
+        if (playerPrefab && spawnPoint)
+        {
+            GameObject newPlayer = Instantiate(playerPrefab, spawnPoint.position, Quaternion.identity);
 
-    private void SpawnPlayer()
-    {
-        Instantiate(playerPrefab, transform.position, Quaternion.identity);
+            var statsCanvas = FindObjectOfType<StatsCanvas>();
+            if (statsCanvas != null)
+            {
+                statsCanvas.AssignPlayerStats(newPlayer.GetComponent<PlayerStats>());
+            }
+            
+            // Here we tell the virtual camera to follow the new player instance
+            virtualCamera.Follow = newPlayer.transform;
+            virtualCamera.LookAt = newPlayer.transform;
+
+            var spawnManager = FindObjectOfType<SpawnManager>();
+            if (spawnManager != null)
+            {
+                spawnManager.ResetLevelAndEnemies();
+            }
+
+            // Hide the respawn button again
+            respawnButton.SetActive(false);
+        }
     }
 }

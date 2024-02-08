@@ -42,13 +42,13 @@ public class PlayerController : MonoBehaviour
 
     private void CheckIfAlive(int newhealth) {
         if (newhealth <= 0) {
-            RemovePlayer();
-            respawnManager.PlayerDied();
+            Die();
         }
     }
     
-    private void RemovePlayer() {
-        Destroy(gameObject);
+    public void Die() {
+        RespawnManager.Instance.PlayerDied();
+        Destroy(gameObject, 0.5f);
     }
 
     public void TakeDamage(int damage) {
